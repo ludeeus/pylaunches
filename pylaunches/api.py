@@ -1,5 +1,5 @@
 """
-A python packages to get information form upcoming space launches,
+A python packages to get information form upcoming space launches.
 
 This code is released under the terms of the MIT license. See the LICENSE
 file for more details.

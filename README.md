@@ -17,9 +17,7 @@ from pylaunches.api import Launches
 
 async def test_pylaunches():
     """Example usage of pylaunches."""
-    stopid = 2190400
-    destination = 'Drammen'
-    data = Launches(LOOP, stopid, destination)
+    data = Launches(LOOP)
     await data.get_launches()
 
     print("Launches:", data.launches)
