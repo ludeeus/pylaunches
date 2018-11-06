@@ -37,7 +37,7 @@ class Launches():
             try:
                 launches[lid]['wsstamp'] = launch['wsstamp']
             except LaunchesError as error:
-                launches[lid]['namwsstampe'] = None
+                launches[lid]['wsstamp'] = None
                 LOGGER.error('Error getting launch information, %s', error)
             try:
                 launches[lid]['name'] = launch['name']
