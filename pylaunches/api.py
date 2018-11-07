@@ -11,15 +11,16 @@ from .error import LaunchesError
 class Launches():
     """A class to get launch information."""
 
-    def __init__(self, loop):
+    def __init__(self, loop, session=None):
         """Initialize the class."""
         self.loop = loop
+        self.session = session
         self._launches = []
 
     async def get_launches(self):
         """Get launch information."""
         from .common import CommonFunctions
-        common = CommonFunctions(self.loop)
+        common = CommonFunctions(self.loop, self.session)
         all_launches = []
         launches = {}
         data = await common.api_call(BASE_URL)

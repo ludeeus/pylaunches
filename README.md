@@ -17,7 +17,8 @@ from pylaunches.api import Launches
 
 async def test_pylaunches():
     """Example usage of pylaunches."""
-    data = Launches(LOOP)
+    custom_session = aiohttp.ClientSession()
+    data = Launches(LOOP, custom_session)
     await data.get_launches()
 
     print("Launches:", data.launches)

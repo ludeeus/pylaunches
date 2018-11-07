@@ -14,18 +14,20 @@ HEADERS = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 class CommonFunctions():
     """A class for common functions."""
 
-    def __init__(self, loop):
+    def __init__(self, loop, session):
         """Initialize the class."""
         self.loop = loop
+        self.session = session
 
     async def api_call(self, endpoint):
         """Call the API."""
         data = None
+        if self.session is None:
+            self.session = aiohttp.ClientSession()
         try:
             async with async_timeout.timeout(5, loop=self.loop):
-                async with aiohttp.ClientSession() as session:
-                    response = await session.get(endpoint, headers=HEADERS)
-                    data = await response.json()
+                response = await self.session.get(endpoint, headers=HEADERS)
+                data = await response.json()
         except LaunchesError as error:
             LOGGER.error('Error connecting to Ruter, %s', error)
         return data
