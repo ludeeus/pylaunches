@@ -32,34 +32,35 @@ class Launches():
             launches[lid] = {}
             try:
                 launches[lid]['start'] = launch['windowstart']
-            except LaunchesError as error:
+            except (LaunchesError, IndexError, KeyError) as error:
                 launches[lid]['start'] = None
                 LOGGER.error('Error getting launch information, %s', error)
             try:
                 launches[lid]['wsstamp'] = launch['wsstamp']
-            except LaunchesError as error:
+            except (LaunchesError, IndexError, KeyError) as error:
                 launches[lid]['wsstamp'] = None
                 LOGGER.error('Error getting launch information, %s', error)
             try:
                 launches[lid]['name'] = launch['name']
-            except LaunchesError as error:
+            except (LaunchesError, IndexError, KeyError) as error:
                 launches[lid]['name'] = None
                 LOGGER.error('Error getting launch information, %s', error)
             try:
-                launches[lid]['agency'] = (launch['location']['pads'][0]
-                                           ['agencies'][0]['name'])
-            except LaunchesError as error:
+                launches[lid]['agency'] = (launch['missions'][0]['agencies']
+                                           [0]['name'])
+            except (LaunchesError, IndexError, KeyError) as error:
                 launches[lid]['agency'] = None
                 LOGGER.error('Error getting launch information, %s', error)
             try:
-                launches[lid]['agency_country_code'] = (launch['location']
+                launches[lid]['agency_country_code'] = (launch['missions'][0]
+                                                        ['agencies'][0]
                                                         ['countryCode'])
-            except LaunchesError as error:
+            except (LaunchesError, IndexError, KeyError) as error:
                 launches[lid]['agency_country_code'] = None
                 LOGGER.error('Error getting launch information, %s', error)
             try:
                 launches[lid]['stream'] = launch['vidURLs'][0]
-            except LaunchesError as error:
+            except (LaunchesError, IndexError, KeyError) as error:
                 launches[lid]['stream'] = None
                 LOGGER.error('Error getting launch information, %s', error)
             all_launches.append(launches[lid])

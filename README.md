@@ -13,6 +13,7 @@ pip install pylaunches
 ```python
 """Example usage of pylaunches."""
 import asyncio
+import aiohttp
 from pylaunches.api import Launches
 
 async def test_pylaunches():
