@@ -40,10 +40,10 @@ class CommonFunctions():
             sorted_data.append(line)
         return sorted_data
 
-    async def timestamp(self, source):
+    async def iso(self, source):
         """Convert to timestamp."""
         from datetime import datetime, timezone
         unix_timestamp = int(source)
         utc_time = datetime.fromtimestamp(unix_timestamp, timezone.utc)
         local_time = utc_time.astimezone()
-        return local_time.strftime("%Y-%m-%d %H:%M:%S.%f%z (%Z)")
+        return local_time.strftime("%Y-%m-%d %H:%M:%S.%f%z (%Z)").isoformat()
