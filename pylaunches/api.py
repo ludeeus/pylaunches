@@ -31,7 +31,7 @@ class Launches():
             lid = launch['id']
             launches[lid] = {}
             try:
-                launches[lid]['start'] = launch['windowstart']
+                launches[lid]['start'] = common.timestamp(launch['wsstamp'])
             except (LaunchesError, IndexError, KeyError, TypeError) as error:
                 launches[lid]['start'] = None
                 LOGGER.debug('Error getting launch information, %s', error)
