@@ -44,6 +44,4 @@ class CommonFunctions():
         """Convert to timestamp."""
         from datetime import datetime, timezone
         unix_timestamp = int(source)
-        utc_time = datetime.fromtimestamp(unix_timestamp, timezone.utc)
-        local_time = utc_time.astimezone()
-        return local_time.strftime("%Y-%m-%d %H:%M:%S.%f%z (%Z)").isoformat()
+        return datetime.fromtimestamp(unix_timestamp).isoformat()
