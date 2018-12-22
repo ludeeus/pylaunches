@@ -42,6 +42,6 @@ class CommonFunctions():
 
     async def iso(self, source):
         """Convert to timestamp."""
-        from datetime import datetime, timezone
+        from datetime import datetime
         unix_timestamp = int(source)
         return datetime.fromtimestamp(unix_timestamp).isoformat()
