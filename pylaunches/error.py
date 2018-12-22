@@ -3,5 +3,3 @@
 
 class LaunchesError(Exception):
     """Define a base error."""
-
-    pass
