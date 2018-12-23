@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     LONG = fh.read()
 setuptools.setup(
     name="pylaunches",
-    version="0.1.2",
+    version="0.2.0",
     author="Joakim Sorensen",
     author_email="ludeeus@gmail.com",
     description="",
