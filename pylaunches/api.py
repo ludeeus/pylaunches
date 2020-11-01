@@ -19,9 +19,12 @@ class PyLaunches:
 
     _close_session = False
 
-    def __init__(self, session: ClientSession or None = None) -> None:
+    def __init__(
+        self, session: ClientSession or None = None, token: str = None
+    ) -> None:
         """Initialize the class."""
         self.session = session
+        self.token = token
         if self.session is None:
             self.session = ClientSession()
             self._close_session = True
@@ -42,7 +45,7 @@ class PyLaunches:
     async def upcoming_launches(self) -> List[Launch] or None:
         """Get upcoming launch information."""
         response = LaunchResponse(
-            await call_api(self.session, f"{BASE_URL}/launch/upcoming/")
+            await call_api(self.session, f"{BASE_URL}/launch/upcoming/", self.token)
         )
         if not response.results:
             raise PyLaunchesNoData("No data")
