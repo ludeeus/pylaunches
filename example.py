@@ -1,16 +1,3 @@
-# PyLaunches
-
-_A python packages to get information form upcoming space launches._
-
-## Install
-
-```bash
-python3 -m pip install pylaunches
-```
-
-### Example usage
-
-```python
 """Example usage of pylaunches."""
 import asyncio
 
@@ -29,9 +16,3 @@ async def example():
 
 
 asyncio.get_event_loop().run_until_complete(example())
-
-```
-
-This package is using the [Launch Library 2 API][launchlibrary] to get the information.
-
-[launchlibrary]: https://thespacedevs.com/llapi
