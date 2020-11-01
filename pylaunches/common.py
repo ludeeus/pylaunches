@@ -15,7 +15,7 @@ async def call_api(
     """Call the API."""
     headers = HEADERS
     if token is not None:
-        headers["Token":token]
+        headers["Token"] = token
     try:
         async with async_timeout.timeout(20, loop=get_event_loop()):
             response = await session.get(endpoint, headers=headers)
