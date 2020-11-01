@@ -1,0 +1,81 @@
+{
+  "count": 1,
+  "next": "https://example.com/launch/upcoming/?limit=10&offset=10",
+  "previous": null,
+  "results": [
+    {
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "url": "https://example.com",
+      "launch_library_id": 1,
+      "slug": "example-01",
+      "name": "Example | Example-01",
+      "status": {
+        "id": 1,
+        "name": "Go"
+      },
+      "net": "1970-01-01T00:00:00z",
+      "window_end": "1970-01-01T00:00:00Z",
+      "window_start": "1970-01-01T00:00:00Z",
+      "inhold": false,
+      "tbdtime": false,
+      "tbddate": false,
+      "probability": 90,
+      "holdreason": "",
+      "failreason": "",
+      "hashtag": null,
+      "launch_service_provider": {
+        "id": 124,
+        "url": "https://example.com",
+        "name": "Example Launch Provider",
+        "type": "Commercial"
+      },
+      "rocket": {
+        "id": 1,
+        "configuration": {
+          "id": 1,
+          "launch_library_id": 1,
+          "url": "https://example.com",
+          "name": "Example-01",
+          "family": "Example",
+          "full_name": "Example-01",
+          "variant": "Example"
+        }
+      },
+      "mission": {
+        "id": 1,
+        "launch_library_id": 1,
+        "name": "NROL-101",
+        "description": "Lorem ipsum.",
+        "launch_designator": null,
+        "type": "Top Secret",
+        "orbit": null
+      },
+      "pad": {
+        "id": 1,
+        "url": "https://example.com",
+        "agency_id": null,
+        "name": "Example Launch Pad",
+        "info_url": null,
+        "wiki_url": "https://example.com",
+        "map_url": "https://example.com",
+        "latitude": "00.000000000",
+        "longitude": "-00.00000000",
+        "location": {
+          "id": 1,
+          "url": "https://example.com",
+          "name": "Top Secret, EARTH",
+          "country_code": "EARTH",
+          "map_image": "https://example.com/image.jpg",
+          "total_launch_count": 1,
+          "total_landing_count": 0
+        },
+        "map_image": "https://example.com/image.jpg",
+        "total_launch_count": 1
+      },
+      "webcast_live": false,
+      "image": "https://example.com/image.jpg",
+      "infographic": "https://example.com/image.jpg",
+      "program": []
+    }
+  ]
+}
