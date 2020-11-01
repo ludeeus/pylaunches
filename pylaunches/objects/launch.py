@@ -291,8 +291,8 @@ class Launch(PyLaunchesData):
         return LaunchMission(self._data.get("mission", {}))
 
     @property
-    def pad(self) -> str:
-        return self._data.get("pad")
+    def pad(self) -> LaunchPad:
+        return LaunchPad(self._data.get("pad", {}))
 
     @property
     def webcast_live(self) -> bool:
