@@ -17,7 +17,7 @@ async def call_api(
     if token is not None:
         headers["Token"] = token
     try:
-        async with async_timeout.timeout(20, loop=get_event_loop()):
+        async with async_timeout.timeout(20):
             response = await session.get(endpoint, headers=headers)
             if response.status != 200:
                 raise PyLaunchesException(f"Unexpected statuscode {response.status}")
