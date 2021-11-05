@@ -4,6 +4,7 @@ A python packages to get information form upcoming space launches.
 This code is released under the terms of the MIT license. See the LICENSE
 file for more details.
 """
+from __future__ import annotations
 from typing import List
 
 from aiohttp import ClientSession
@@ -20,7 +21,9 @@ class PyLaunches:
     _close_session = False
 
     def __init__(
-        self, session: ClientSession or None = None, token: str = None
+        self,
+        session: ClientSession | None = None,
+        token: str = None,
     ) -> None:
         """Initialize the class."""
         self.session = session
@@ -29,7 +32,7 @@ class PyLaunches:
             self.session = ClientSession()
             self._close_session = True
 
-    async def __aenter__(self) -> None:
+    async def __aenter__(self) -> PyLaunches:
         """Async enter."""
         return self
 

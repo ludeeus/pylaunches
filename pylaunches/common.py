@@ -2,25 +2,31 @@
 from asyncio import CancelledError, TimeoutError
 from typing import Optional
 
-import async_timeout
-from aiohttp import ClientSession
+from aiohttp import ClientSession, ClientTimeout
 
 from pylaunches.const import HEADERS
 from pylaunches.exceptions import PyLaunchesException
 
 
 async def call_api(
-    session: ClientSession, endpoint: str, token: Optional[str]
+    session: ClientSession,
+    endpoint: str,
+    token: Optional[str],
 ) -> dict or None:
     """Call the API."""
     headers = HEADERS
     if token is not None:
         headers["Token"] = token
     try:
-        async with async_timeout.timeout(20):
-            response = await session.get(endpoint, headers=headers)
-            if response.status != 200:
-                raise PyLaunchesException(f"Unexpected statuscode {response.status}")
-            return await response.json()
-    except (CancelledError, TimeoutError, PyLaunchesException) as exception:
+        response = await session.get(
+            endpoint,
+            headers=headers,
+            timeout=ClientTimeout(total=20),
+        )
+        if response.status != 200:
+            raise PyLaunchesException(f"Unexpected statuscode {response.status}")
+        return await response.json()
+    except (CancelledError, PyLaunchesException) as exception:
         raise PyLaunchesException(exception)
+    except TimeoutError:
+        raise PyLaunchesException(f"Timeout while fetching data from {endpoint}")
