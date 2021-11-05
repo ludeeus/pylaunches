@@ -6,15 +6,15 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pylaunches",
-    version="0.0.0",
+    version="main",
     author="Joakim Sorensen",
     author_email="hi@ludeeus.dev",
     description="",
     long_description=DESCRIPTION,
-    install_requires=["aiohttp", "async_timeout<=3.0.1", "pytest-runner"],
+    install_requires=["aiohttp", "pytest-runner"],
     long_description_content_type="text/markdown",
     url="https://github.com/ludeeus/pylaunches",
-    packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
+    packages=setuptools.find_packages(include=["pylaunches", "pylaunches.*"]),
     classifiers=(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
