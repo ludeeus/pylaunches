@@ -11,8 +11,8 @@ async def example():
             launches = await api.upcoming_launches()
             for launch in launches:
                 print(launch.name)
-        except PyLaunchesException:
-            print(":(")
+        except PyLaunchesException as exception:
+            print(":(", exception)
 
 
 asyncio.get_event_loop().run_until_complete(example())
