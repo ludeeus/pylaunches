@@ -1,5 +1,5 @@
 """Common attributes and functions."""
-from asyncio import CancelledError, TimeoutError, get_event_loop
+from asyncio import CancelledError, TimeoutError
 from typing import Optional
 
 import async_timeout
