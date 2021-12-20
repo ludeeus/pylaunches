@@ -112,7 +112,7 @@ class LaunchMission(PyLaunchesData):
 
     @property
     def orbit(self) -> LaunchMissionOrbit:
-        return LaunchMissionOrbit(self._data.get("name", {}))
+        return LaunchMissionOrbit(self._data.get("orbit", {}))
 
 
 class LaunchStatus(PyLaunchesData):
