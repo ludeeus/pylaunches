@@ -40,13 +40,13 @@ async def test_starship_events_exceptions(aresponses):
         "ll.thespacedevs.com",
         "/2.0.0/dashboard/starship/",
         "get",
-        aresponses.Response(text="{}", headers=HEADERS),
+        aresponses.Response(text=None, headers=HEADERS),
     )
     aresponses.add(
         "ll.thespacedevs.com",
         "/2.0.0/dashboard/starship/",
         "get",
-        aresponses.Response(text="{}", headers=HEADERS, status=500),
+        aresponses.Response(text=None, headers=HEADERS, status=500),
     )
 
     async with PyLaunches() as client:
