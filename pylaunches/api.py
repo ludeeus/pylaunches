@@ -60,6 +60,6 @@ class PyLaunches:
         response = StarshipResponse(
             await call_api(self.session, f"{BASE_URL}/dashboard/starship/", self.token)
         )
-        if not response.previous:
+        if not response.previous.launches:
             raise PyLaunchesNoData("No starship data.")
         return response
