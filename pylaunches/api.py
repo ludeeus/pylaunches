@@ -13,6 +13,7 @@ from pylaunches.common import call_api
 from pylaunches.const import BASE_URL
 from pylaunches.exceptions import PyLaunchesNoData
 from pylaunches.objects.launch import Launch, LaunchResponse
+from pylaunches.objects.starship import StarshipResponse
 
 
 class PyLaunches:
@@ -51,5 +52,14 @@ class PyLaunches:
             await call_api(self.session, f"{BASE_URL}/launch/upcoming/", self.token)
         )
         if not response.results:
-            raise PyLaunchesNoData("No data")
+            raise PyLaunchesNoData("No launch data")
         return response.results
+
+    async def starship_events(self) -> StarshipResponse or None:
+        """Get upcoming launch information for starship."""
+        response = StarshipResponse(
+            await call_api(self.session, f"{BASE_URL}/dashboard/starship/", self.token)
+        )
+        if not response:
+            raise PyLaunchesNoData("No starship data.")
+        return response

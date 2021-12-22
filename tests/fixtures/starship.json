@@ -1,0 +1,255 @@
+{
+    "upcoming":{
+       "launches":[
+        {
+            "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            "url": "https://example.com",
+            "launch_library_id": 1,
+            "slug": "example-01",
+            "name": "Example | Example-01",
+            "status": {
+              "id": 1,
+              "name": "Go"
+            },
+            "net": "1970-01-01T00:00:00z",
+            "window_end": "1970-01-01T00:00:00Z",
+            "window_start": "1970-01-01T00:00:00Z",
+            "inhold": false,
+            "tbdtime": false,
+            "tbddate": false,
+            "probability": 90,
+            "holdreason": "",
+            "failreason": "",
+            "hashtag": null,
+            "launch_service_provider": {
+              "id": 124,
+              "url": "https://example.com",
+              "name": "Example Launch Provider",
+              "type": "Commercial"
+            },
+            "rocket": {
+              "id": 1,
+              "configuration": {
+                "id": 1,
+                "launch_library_id": 1,
+                "url": "https://example.com",
+                "name": "Example-01",
+                "family": "Example",
+                "full_name": "Example-01",
+                "variant": "Example"
+              }
+            },
+            "mission": {
+              "id": 1,
+              "launch_library_id": 1,
+              "name": "NROL-101",
+              "description": "Lorem ipsum.",
+              "launch_designator": null,
+              "type": "Top Secret",
+              "orbit": null
+            },
+            "pad": {
+              "id": 1,
+              "url": "https://example.com",
+              "agency_id": null,
+              "name": "Example Launch Pad",
+              "info_url": null,
+              "wiki_url": "https://example.com",
+              "map_url": "https://example.com",
+              "latitude": "00.000000000",
+              "longitude": "-00.00000000",
+              "location": {
+                "id": 1,
+                "url": "https://example.com",
+                "name": "Top Secret, EARTH",
+                "country_code": "EARTH",
+                "map_image": "https://example.com/image.jpg",
+                "total_launch_count": 1,
+                "total_landing_count": 0
+              },
+              "map_image": "https://example.com/image.jpg",
+              "total_launch_count": 1
+            },
+            "webcast_live": false,
+            "image": "https://example.com/image.jpg",
+            "infographic": "https://example.com/image.jpg",
+            "program": []
+          }
+       ],
+       "events":[
+          
+       ]
+    },
+    "previous":{
+       "launches":[
+        {
+            "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            "url": "https://example.com",
+            "launch_library_id": 1,
+            "slug": "example-01",
+            "name": "Example | Example-01",
+            "status": {
+              "id": 1,
+              "name": "Go"
+            },
+            "net": "1970-01-01T00:00:00z",
+            "window_end": "1970-01-01T00:00:00Z",
+            "window_start": "1970-01-01T00:00:00Z",
+            "inhold": false,
+            "tbdtime": false,
+            "tbddate": false,
+            "probability": 90,
+            "holdreason": "",
+            "failreason": "",
+            "hashtag": null,
+            "launch_service_provider": {
+              "id": 124,
+              "url": "https://example.com",
+              "name": "Example Launch Provider",
+              "type": "Commercial"
+            },
+            "rocket": {
+              "id": 1,
+              "configuration": {
+                "id": 1,
+                "launch_library_id": 1,
+                "url": "https://example.com",
+                "name": "Example-01",
+                "family": "Example",
+                "full_name": "Example-01",
+                "variant": "Example"
+              }
+            },
+            "mission": {
+              "id": 1,
+              "launch_library_id": 1,
+              "name": "NROL-101",
+              "description": "Lorem ipsum.",
+              "launch_designator": null,
+              "type": "Top Secret",
+              "orbit": null
+            },
+            "pad": {
+              "id": 1,
+              "url": "https://example.com",
+              "agency_id": null,
+              "name": "Example Launch Pad",
+              "info_url": null,
+              "wiki_url": "https://example.com",
+              "map_url": "https://example.com",
+              "latitude": "00.000000000",
+              "longitude": "-00.00000000",
+              "location": {
+                "id": 1,
+                "url": "https://example.com",
+                "name": "Top Secret, EARTH",
+                "country_code": "EARTH",
+                "map_image": "https://example.com/image.jpg",
+                "total_launch_count": 1,
+                "total_landing_count": 0
+              },
+              "map_image": "https://example.com/image.jpg",
+              "total_launch_count": 1
+            },
+            "webcast_live": false,
+            "image": "https://example.com/image.jpg",
+            "infographic": "https://example.com/image.jpg",
+            "program": []
+          }
+       ],
+       "events":[
+          {
+             "id":1,
+             "url":"https://example.com/",
+             "slug":"example-01",
+             "name":"Example | Example-01",
+             "type":{
+                "id":1,
+                "name":"Launch"
+             },
+             "description":"This is a description of something, hope you like it.",
+             "location":"Top Secret, EARTH",
+             "news_url":"https://example.com/",
+             "video_url":"https://example.com/",
+             "feature_image":"https://example.com/image.jpg",
+             "date":"1970-01-01T00:00:00Z",
+             "launches":[
+                
+             ],
+             "expeditions":[
+                
+             ],
+             "spacestations":[
+                
+             ],
+             "program":[
+                {
+                   "id":1,
+                   "url":"https://example.com",
+                   "name":"SpaceX Starship",
+                   "description":"This is a description of something, hope you like it.",
+                   "agencies":[
+                      {
+                         "id":1,
+                         "url":"https://example.com",
+                         "name":"SpaceX",
+                         "type":"Commercial"
+                      }
+                   ],
+                   "image_url":"https://example.com/image.jpg",
+                   "start_date":"1970-01-01T00:00:00Z",
+                   "end_date":"1970-01-01T00:00:00Z",
+                   "info_url":"https://example.com",
+                   "wiki_url":"https://example.com"
+                }
+             ]
+          }
+       ]
+    },
+    "live_streams":[
+       {
+          "title":"24/7 Livestream",
+          "description":"This is a description of something, hope you like it.",
+          "image":"https://example.com/image.jpg",
+          "url":"https://example.com"
+       }
+    ],
+    "road_closures":[
+       {
+          "id":1,
+          "title":"Primary Date",
+          "status":{
+             "id":1,
+             "name":"Scheduled"
+          },
+          "window_start":"1970-01-01T00:00:00Z",
+          "window_end":"1970-01-01T00:00:00Z"
+       }
+    ],
+    "notices":[
+       
+    ],
+    "vehicles":[
+       {
+          "id":1,
+          "url":"https://example.com",
+          "flight_proven":false,
+          "serial_number":"BN1",
+          "status":"scrapped",
+          "details":"This is a description of something, hope you like it.",
+          "launcher_config":{
+            "id": 1,
+            "launch_library_id": 1,
+            "url": "https://example.com",
+            "name": "Example-01",
+            "family": "Example",
+            "full_name": "Example-01",
+            "variant": "Example"
+          },
+          "image_url":"https://example.com/image.jpg",
+          "flights":0,
+          "last_launch_date":"1970-01-01T00:00:00Z",
+          "first_launch_date":"1970-01-01T00:00:00Z"
+       }
+    ]
+ }
