@@ -8,7 +8,7 @@ async def example():
     """Example usage of pylaunches."""
     async with PyLaunches() as api:
         try:
-            launches = await api.upcoming_launches(params={"limit": "1"})
+            launches = await api.upcoming_launches()
             for launch in launches:
                 print(launch.name)
         except PyLaunchesException as exception:
