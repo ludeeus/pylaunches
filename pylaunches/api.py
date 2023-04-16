@@ -10,7 +10,7 @@ from typing import List, Mapping, Optional
 from aiohttp import ClientSession
 
 from pylaunches.common import call_api
-from pylaunches.const import BASE_URL, DEFAULT_API_VERSION
+from pylaunches.const import BASE_URL, DEFAULT_API_VERSION, DEV_BASE_URL
 from pylaunches.exceptions import PyLaunchesNoData
 from pylaunches.objects.launch import Launch, LaunchResponse
 from pylaunches.objects.starship import StarshipResponse
@@ -27,6 +27,7 @@ class PyLaunches:
         token: str = None,
         *,
         api_version: str = DEFAULT_API_VERSION,
+        dev: bool = False,
     ) -> None:
         """Initialize the class."""
         self.session = session
@@ -35,7 +36,7 @@ class PyLaunches:
             self.session = ClientSession()
             self._close_session = True
 
-        self._base_url = f"{BASE_URL}/{api_version}"
+        self._base_url = f"{DEV_BASE_URL if dev else BASE_URL}/{api_version}"
 
     async def __aenter__(self) -> PyLaunches:
         """Async enter."""

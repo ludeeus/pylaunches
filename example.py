@@ -6,7 +6,7 @@ from pylaunches import PyLaunches, PyLaunchesException
 
 async def example():
     """Example usage of pylaunches."""
-    async with PyLaunches() as api:
+    async with PyLaunches(dev=True) as api:
         try:
             launches = await api.upcoming_launches()
             for launch in launches:
