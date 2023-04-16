@@ -9,6 +9,7 @@ async def test_default_api_version():
     async with PyLaunches() as client:
         assert client._base_url == f"https://ll.thespacedevs.com/{DEFAULT_API_VERSION}"
 
+
 @pytest.mark.asyncio
 async def test_custom_api_version():
     """Test custom api version."""

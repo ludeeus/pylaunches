@@ -26,7 +26,7 @@ class PyLaunches:
         session: ClientSession | None = None,
         token: str = None,
         *,
-        api_version: str = DEFAULT_API_VERSION
+        api_version: str = DEFAULT_API_VERSION,
     ) -> None:
         """Initialize the class."""
         self.session = session
@@ -58,7 +58,9 @@ class PyLaunches:
     async def upcoming_launches(self) -> List[Launch] or None:
         """Get upcoming launch information."""
         response = LaunchResponse(
-            await call_api(self.session, f"{self._base_url}/launch/upcoming/", self.token)
+            await call_api(
+                self.session, f"{self._base_url}/launch/upcoming/", self.token
+            )
         )
         if not response.results:
             raise PyLaunchesNoData("No launch data")
@@ -67,7 +69,9 @@ class PyLaunches:
     async def starship_events(self) -> StarshipResponse or None:
         """Get upcoming launch information for starship."""
         response = StarshipResponse(
-            await call_api(self.session, f"{self._base_url}/dashboard/starship/", self.token)
+            await call_api(
+                self.session, f"{self._base_url}/dashboard/starship/", self.token
+            )
         )
         if not response.previous.launches:
             raise PyLaunchesNoData("No starship data.")
