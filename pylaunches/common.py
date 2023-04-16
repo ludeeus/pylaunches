@@ -1,6 +1,6 @@
 """Common attributes and functions."""
 from asyncio import CancelledError, TimeoutError
-from typing import Optional
+from typing import Mapping, Optional
 
 from aiohttp import ClientSession, ClientTimeout
 
@@ -12,6 +12,7 @@ async def call_api(
     session: ClientSession,
     endpoint: str,
     token: Optional[str],
+    params: Optional[Mapping[str, str]],
 ) -> dict or None:
     """Call the API."""
     headers = HEADERS
@@ -19,9 +20,7 @@ async def call_api(
         headers["Token"] = token
     try:
         response = await session.get(
-            endpoint,
-            headers=headers,
-            timeout=ClientTimeout(total=20),
+            endpoint, headers=headers, timeout=ClientTimeout(total=20), params=params
         )
         if response.status != 200:
             raise PyLaunchesException(f"Unexpected statuscode {response.status}")

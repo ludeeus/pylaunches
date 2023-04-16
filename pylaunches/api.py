@@ -5,7 +5,7 @@ This code is released under the terms of the MIT license. See the LICENSE
 file for more details.
 """
 from __future__ import annotations
-from typing import List
+from typing import List, Mapping, Optional
 
 from aiohttp import ClientSession
 
@@ -50,22 +50,36 @@ class PyLaunches:
         if self.session and self._close_session:
             await self.session.close()
 
-    async def upcoming_launches(self) -> List[Launch] or None:
+    async def upcoming_launches(
+        self,
+        *,
+        filters: Optional[Mapping[str, str]] = None,
+    ) -> List[Launch] or None:
         """Get upcoming launch information."""
         response = LaunchResponse(
             await call_api(
-                self.session, f"{self._base_url}/launch/upcoming/", self.token
+                self.session,
+                f"{self._base_url}/launch/upcoming/",
+                self.token,
+                params=filters or None,
             )
         )
         if not response.results:
             raise PyLaunchesNoData("No launch data")
         return response.results
 
-    async def starship_events(self) -> StarshipResponse or None:
+    async def starship_events(
+        self,
+        *,
+        filters: Optional[Mapping[str, str]] = None,
+    ) -> StarshipResponse or None:
         """Get upcoming launch information for starship."""
         response = StarshipResponse(
             await call_api(
-                self.session, f"{self._base_url}/dashboard/starship/", self.token
+                self.session,
+                f"{self._base_url}/dashboard/starship/",
+                self.token,
+                params=filters or None,
             )
         )
         if not response.previous.launches:

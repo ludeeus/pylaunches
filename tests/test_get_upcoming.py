@@ -45,3 +45,19 @@ async def test_upcoming_launches_exceptions(aresponses):
     async with PyLaunches() as client:
         with pytest.raises(PyLaunchesException):
             await client.upcoming_launches()
+
+
+@pytest.mark.asyncio
+async def test_upcoming_launches_params(aresponses):
+    response = fixture("upcoming.json", False)
+    aresponses.add(
+        "ll.thespacedevs.com",
+        "/2.2.0/launch/upcoming/?limit=1",
+        "get",
+        aresponses.Response(text=response, headers=HEADERS),
+        match_querystring=True,
+    )
+
+    async with PyLaunches() as client:
+        launches = await client.upcoming_launches(filters={"limit": "1"})
+        assert launches
