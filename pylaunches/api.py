@@ -35,7 +35,7 @@ class PyLaunches:
             self.session = ClientSession()
             self._close_session = True
 
-        self._api_version = api_version
+        self._base_url = f"{BASE_URL}/{api_version}"
 
     async def __aenter__(self) -> PyLaunches:
         """Async enter."""
@@ -44,11 +44,6 @@ class PyLaunches:
     async def __aexit__(self, *exc_info) -> None:
         """Async exit."""
         await self._close()
-
-    @property
-    def _base_url(self) -> str:
-        """Return the base url."""
-        return f"{BASE_URL}/{self._api_version}"
 
     async def _close(self) -> None:
         """Close open client session."""
