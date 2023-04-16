@@ -10,7 +10,7 @@ from typing import List
 from aiohttp import ClientSession
 
 from pylaunches.common import call_api
-from pylaunches.const import BASE_URL
+from pylaunches.const import BASE_URL, DEFAULT_API_VERSION
 from pylaunches.exceptions import PyLaunchesNoData
 from pylaunches.objects.launch import Launch, LaunchResponse
 from pylaunches.objects.starship import StarshipResponse
@@ -25,6 +25,8 @@ class PyLaunches:
         self,
         session: ClientSession | None = None,
         token: str = None,
+        *,
+        api_version: str = DEFAULT_API_VERSION
     ) -> None:
         """Initialize the class."""
         self.session = session
@@ -32,6 +34,8 @@ class PyLaunches:
         if self.session is None:
             self.session = ClientSession()
             self._close_session = True
+
+        self._api_version = api_version
 
     async def __aenter__(self) -> PyLaunches:
         """Async enter."""
@@ -41,6 +45,11 @@ class PyLaunches:
         """Async exit."""
         await self._close()
 
+    @property
+    def _base_url(self) -> str:
+        """Return the base url."""
+        return f"{BASE_URL}/{self._api_version}"
+
     async def _close(self) -> None:
         """Close open client session."""
         if self.session and self._close_session:
@@ -49,7 +58,7 @@ class PyLaunches:
     async def upcoming_launches(self) -> List[Launch] or None:
         """Get upcoming launch information."""
         response = LaunchResponse(
-            await call_api(self.session, f"{BASE_URL}/launch/upcoming/", self.token)
+            await call_api(self.session, f"{self._base_url}/launch/upcoming/", self.token)
         )
         if not response.results:
             raise PyLaunchesNoData("No launch data")
@@ -58,7 +67,7 @@ class PyLaunches:
     async def starship_events(self) -> StarshipResponse or None:
         """Get upcoming launch information for starship."""
         response = StarshipResponse(
-            await call_api(self.session, f"{BASE_URL}/dashboard/starship/", self.token)
+            await call_api(self.session, f"{self._base_url}/dashboard/starship/", self.token)
         )
         if not response.previous.launches:
             raise PyLaunchesNoData("No starship data.")

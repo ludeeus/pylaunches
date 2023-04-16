@@ -11,7 +11,7 @@ async def test_upcoming_launches(aresponses):
     response = fixture("upcoming.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.0.0/launch/upcoming/",
+        "/2.2.0/launch/upcoming/",
         "get",
         aresponses.Response(text=response, headers=HEADERS),
     )
@@ -27,13 +27,13 @@ async def test_upcoming_launches(aresponses):
 async def test_upcoming_launches_exceptions(aresponses):
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.0.0/launch/upcoming/",
+        "/2.2.0/launch/upcoming/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS),
     )
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.0.0/launch/upcoming/",
+        "/2.2.0/launch/upcoming/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS, status=500),
     )

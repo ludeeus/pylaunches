@@ -11,7 +11,7 @@ async def test_starship_events(aresponses):
     response = fixture("starship.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.0.0/dashboard/starship/",
+        "/2.2.0/dashboard/starship/",
         "get",
         aresponses.Response(text=response, headers=HEADERS),
     )
@@ -38,13 +38,13 @@ async def test_starship_events(aresponses):
 async def test_starship_events_exceptions(aresponses):
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.0.0/dashboard/starship/",
+        "/2.2.0/dashboard/starship/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS),
     )
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.0.0/dashboard/starship/",
+        "/2.2.0/dashboard/starship/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS, status=500),
     )
