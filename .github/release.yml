@@ -1,0 +1,20 @@
+changelog:
+  categories:
+    - title: Breaking Changes
+      labels:
+        - breaking-change
+    - title: New Features
+      labels:
+        - new-feature
+    - title: Refactor
+      labels:
+        - refactor
+    - title: Bugfixes
+      labels:
+        - bugfix
+    - title: Project changes
+      labels:
+        - internal
+    - title: Dependency changes
+      labels:
+        - dependencies
