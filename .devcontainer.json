@@ -1,25 +1,52 @@
 {
-  "name": "ludeeus/pylaunches",
-  "image": "mcr.microsoft.com/vscode/devcontainers/python:0-3.11-bullseye",
-  "postCreateCommand": "python3 -m pip install -e . && python3 -m pip install -r requirements.txt",
+  "name": "pylaunches",
   "customizations": {
-    "extensions": [
-      "ms-python.python",
-      "github.vscode-pull-request-github",
-      "ryanluker.vscode-coverage-gutters",
-      "ms-python.vscode-pylance",
-      "GitHub.copilot"
-    ],
     "vscode": {
       "settings": {
-        "files.eol": "\n",
-        "editor.tabSize": 4,
-        "editor.formatOnPaste": false,
-        "editor.formatOnSave": true,
-        "editor.formatOnType": true,
-        "files.trimTrailingWhitespace": true,
-        "python.formatting.provider": "black"
+        "[python]": {
+          "editor.codeActionsOnSave": {
+            "source.fixAll": "always",
+            "source.organizeImports": "always"
+          },
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": "ms-python.black-formatter"
+        },
+        "coverage-gutters.customizable.context-menu": true,
+        "coverage-gutters.customizable.status-bar-toggler-watchCoverageAndVisibleEditors-enabled": true,
+        "coverage-gutters.showGutterCoverage": false,
+        "coverage-gutters.showLineCoverage": true,
+        "coverage-gutters.xmlname": "coverage.xml",
+        "python.analysis.extraPaths": [
+          "${workspaceFolder}/src"
+        ],
+        "python.formatting.provider": "ruff format",
+        "python.linting.enabled": true,
+        "python.linting.mypyEnabled": true,
+        "python.testing.cwd": "${workspaceFolder}",
+        "python.testing.pytestArgs": [
+          "--cov-report=xml"
+        ],
+        "python.testing.pytestEnabled": true,
+        "ruff.importStrategy": "fromEnvironment",
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "extensions": [
+          "be5invis.toml",
+          "GitHub.copilot",
+          "ms-python.black-formatter",
+          "ms-python.python",
+          "ms-python.vscode-pylance",
+          "ryanluker.vscode-coverage-gutters"
+        ]
       }
     }
-  }
+  },
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/poetry:2": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "installTools": false,
+      "version": "3.11"
+    }
+  },
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "updateContentCommand": "poetry install"
 }
