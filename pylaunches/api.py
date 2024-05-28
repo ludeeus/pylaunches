@@ -6,7 +6,7 @@ file for more details.
 """
 
 from __future__ import annotations
-from typing import List, Mapping, Optional
+from typing import Mapping
 
 from aiohttp import ClientSession
 
@@ -55,15 +55,15 @@ class PyLaunches:
     async def upcoming_launches(
         self,
         *,
-        filters: Optional[Mapping[str, str]] = None,
-    ) -> List[Launch] or None:
+        filters: Mapping[str, str] | None = None,
+    ) -> list[Launch]:
         """Get upcoming launch information."""
         response = LaunchResponse(
             await call_api(
                 self.session,
                 f"{self._base_url}/launch/upcoming/",
                 self.token,
-                params=filters or None,
+                params=filters,
             )
         )
         if not response.results:
@@ -73,15 +73,15 @@ class PyLaunches:
     async def starship_events(
         self,
         *,
-        filters: Optional[Mapping[str, str]] = None,
-    ) -> StarshipResponse or None:
+        filters: Mapping[str, str] | None = None,
+    ) -> StarshipResponse:
         """Get upcoming launch information for starship."""
         response = StarshipResponse(
             await call_api(
                 self.session,
                 f"{self._base_url}/dashboard/starship/",
                 self.token,
-                params=filters or None,
+                params=filters,
             )
         )
         if not response.previous.launches:

@@ -14,14 +14,17 @@ async def call_api(
     endpoint: str,
     token: Optional[str],
     params: Optional[Mapping[str, str]],
-) -> dict or None:
+) -> dict:
     """Call the API."""
     headers = HEADERS
     if token is not None:
         headers["Token"] = token
     try:
         response = await session.get(
-            endpoint, headers=headers, timeout=ClientTimeout(total=20), params=params
+            endpoint,
+            headers=headers,
+            timeout=ClientTimeout(total=20),
+            params=params,
         )
         if response.status != 200:
             raise PyLaunchesException(f"Unexpected statuscode {response.status}")
