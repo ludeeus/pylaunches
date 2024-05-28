@@ -1,0 +1,30 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+
+[tool.poetry]
+authors = ["Ludeeus <ludeeus@ludeeus.dev>"]
+classifiers = [
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+exclude = ['**/__pycache__']
+include = ["pylaunches", "pylaunches.*", "LICENCE"]
+license = "MIT"
+description = ""
+maintainers = ["Ludeeus <ludeeus@ludeeus.dev>"]
+name = "pylaunches"
+readme = "README.md"
+repository = "https://github.com/ludeeus/pylaunches"
+version = "0"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aiohttp = "^3.6"
+
+[tool.poetry.dev-dependencies]
+aresponses = "3.0.0"
+black = "24.4.2"
+pytest = "8.2.1"
+pytest-asyncio = "0.23.7"
