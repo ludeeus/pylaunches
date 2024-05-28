@@ -1,6 +1,6 @@
 from typing import List
 
-from pylaunches.objects.data import PyLaunchesData
+from .data import PyLaunchesData
 
 
 class LaunchServiceProvider(PyLaunchesData):

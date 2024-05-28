@@ -1,5 +1,5 @@
-from pylaunches.objects.data import PyLaunchesData
-from pylaunches.objects.launch import Launch
+from .data import PyLaunchesData
+from .launch import Launch
 
 
 class EventType(PyLaunchesData):

@@ -1,8 +1,8 @@
-from typing import Dict, List
+from typing import List
 
-from pylaunches.objects.data import PyLaunchesData
-from pylaunches.objects.event import Event
-from pylaunches.objects.launch import Launch, RocketConfiguration
+from .data import PyLaunchesData
+from .event import Event
+from .launch import Launch, RocketConfiguration
 
 
 class LiveStream(PyLaunchesData):
