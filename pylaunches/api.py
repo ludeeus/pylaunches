@@ -10,11 +10,11 @@ from typing import List, Mapping, Optional
 
 from aiohttp import ClientSession
 
-from pylaunches.common import call_api
-from pylaunches.const import BASE_URL, DEFAULT_API_VERSION, DEV_BASE_URL
-from pylaunches.exceptions import PyLaunchesNoData
-from pylaunches.objects.launch import Launch, LaunchResponse
-from pylaunches.objects.starship import StarshipResponse
+from .common import call_api
+from .const import BASE_URL, DEFAULT_API_VERSION, DEV_BASE_URL
+from .exceptions import PyLaunchesNoData
+from .objects.launch import Launch, LaunchResponse
+from .objects.starship import StarshipResponse
 
 
 class PyLaunches:

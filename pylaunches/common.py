@@ -5,8 +5,8 @@ from typing import Mapping, Optional
 
 from aiohttp import ClientSession, ClientTimeout
 
-from pylaunches.const import HEADERS
-from pylaunches.exceptions import PyLaunchesException
+from .const import HEADERS
+from .exceptions import PyLaunchesException
 
 
 async def call_api(
