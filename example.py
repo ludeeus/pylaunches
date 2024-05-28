@@ -1,19 +1,31 @@
 """Example usage of pylaunches."""
 
 import asyncio
+import logging
+import os
+
 
 from pylaunches import PyLaunches, PyLaunchesException
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    handlers=[logging.StreamHandler()],
+)
+
+log = logging.getLogger(__name__)
 
 
 async def example():
     """Example usage of pylaunches."""
-    async with PyLaunches(dev=True) as api:
+    async with PyLaunches(token=os.environ.get("LAUNCH_TOKEN"), dev=True) as client:
         try:
-            launches = await api.upcoming_launches()
+            launches = await client.upcoming_launches()
             for launch in launches:
-                print(launch.name)
+                log.info(launch.name)
         except PyLaunchesException as exception:
-            print(":(", exception)
+            log.exception(exception)
 
 
-asyncio.get_event_loop().run_until_complete(example())
+asyncio.run(example())
