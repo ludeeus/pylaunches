@@ -4,6 +4,7 @@ A python packages to get information form upcoming space launches.
 This code is released under the terms of the MIT license. See the LICENSE
 file for more details.
 """
+
 from __future__ import annotations
 from typing import List, Mapping, Optional
 

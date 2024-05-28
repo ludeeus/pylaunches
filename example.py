@@ -1,4 +1,5 @@
 """Example usage of pylaunches."""
+
 import asyncio
 
 from pylaunches import PyLaunches, PyLaunchesException
