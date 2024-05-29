@@ -6,7 +6,7 @@ from tests.common import fixture
 
 
 @pytest.mark.asyncio
-async def test_starship_events(aresponses):
+async def test_dashboard_starship(aresponses):
     response = fixture("starship.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
@@ -16,7 +16,7 @@ async def test_starship_events(aresponses):
     )
 
     async with PyLaunches() as client:
-        starship = await client.starship_events()
+        starship = await client.dashboard_starship()
         upcoming_launch = starship["upcoming"]["launches"][0]
         assert upcoming_launch["name"] == "Example | Example-01"
         upcoming_event = starship["upcoming"]["events"][0]
@@ -34,7 +34,7 @@ async def test_starship_events(aresponses):
 
 
 @pytest.mark.asyncio
-async def test_starship_events_exceptions(aresponses):
+async def test_dashboard_starship_exceptions(aresponses):
     aresponses.add(
         "ll.thespacedevs.com",
         "/2.2.0/dashboard/starship/",
@@ -50,15 +50,15 @@ async def test_starship_events_exceptions(aresponses):
 
     async with PyLaunches() as client:
         with pytest.raises(PyLaunchesError, match="No starship data"):
-            await client.starship_events()
+            await client.dashboard_starship()
 
     async with PyLaunches() as client:
         with pytest.raises(PyLaunchesError):
-            await client.starship_events()
+            await client.dashboard_starship()
 
 
 @pytest.mark.asyncio
-async def test_starship_params(aresponses):
+async def test_dashboard_starship_params(aresponses):
     response = fixture("starship.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
@@ -69,5 +69,5 @@ async def test_starship_params(aresponses):
     )
 
     async with PyLaunches() as client:
-        launches = await client.starship_events(filters={"limit": "1"})
+        launches = await client.dashboard_starship(filters={"limit": "1"})
         assert launches
