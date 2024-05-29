@@ -1,9 +1,5 @@
 """Define package exception."""
 
 
-class PyLaunchesException(BaseException):
-    """Define a base exception."""
-
-
-class PyLaunchesNoData(PyLaunchesException):
+class PyLaunchesError(BaseException):
     """Define a base exception."""
