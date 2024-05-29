@@ -13,8 +13,7 @@ from aiohttp import ClientSession
 from .common import call_api
 from .const import BASE_URL, DEFAULT_API_VERSION, DEV_BASE_URL
 from .exceptions import PyLaunchesNoData
-from .objects.launch import Launch, LaunchResponse
-from .objects.starship import StarshipResponse
+from .types import Launch, StarshipResponse, PyLaunchesResponse
 
 
 class PyLaunches:
@@ -58,17 +57,15 @@ class PyLaunches:
         filters: Mapping[str, str] | None = None,
     ) -> list[Launch]:
         """Get upcoming launch information."""
-        response = LaunchResponse(
-            await call_api(
-                self.session,
-                f"{self._base_url}/launch/upcoming/",
-                self.token,
-                params=filters,
-            )
+        response: PyLaunchesResponse[list[Launch]] = await call_api(
+            self.session,
+            f"{self._base_url}/launch/upcoming/",
+            self.token,
+            params=filters,
         )
-        if not response.results:
+        if not (results := response.get("results")):
             raise PyLaunchesNoData("No launch data")
-        return response.results
+        return results
 
     async def starship_events(
         self,
@@ -84,6 +81,6 @@ class PyLaunches:
                 params=filters,
             )
         )
-        if not response.previous.launches:
+        if not response.get("previous", {}).get("launches"):
             raise PyLaunchesNoData("No starship data.")
         return response
