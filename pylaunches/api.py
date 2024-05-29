@@ -74,11 +74,11 @@ class PyLaunches:
     ) -> StarshipResponse:
         """Get upcoming launch information for starship."""
         response: StarshipResponse = await call_api(
-                self.session,
-                f"{self._base_url}/dashboard/starship/",
-                self.token,
-                params=filters,
-            )
+            self.session,
+            f"{self._base_url}/dashboard/starship/",
+            self.token,
+            params=filters,
+        )
         if not response.get("previous", {}).get("launches"):
             raise PyLaunchesError("No starship data.")
         return response
