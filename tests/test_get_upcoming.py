@@ -1,4 +1,3 @@
-import aiohttp
 import pytest
 
 from pylaunches import PyLaunches, PyLaunchesError
