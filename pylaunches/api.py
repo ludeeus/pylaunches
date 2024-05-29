@@ -6,12 +6,12 @@ file for more details.
 """
 
 from __future__ import annotations
+from asyncio import CancelledError
 from typing import Mapping
 
-from aiohttp import ClientSession
+from aiohttp import ClientSession, ClientTimeout
 
-from .common import call_api
-from .const import BASE_URL, DEFAULT_API_VERSION, DEV_BASE_URL
+from .const import BASE_URL, DEFAULT_API_VERSION, DEV_BASE_URL, HEADERS
 from .exceptions import PyLaunchesError
 from .types import Event, Launch, StarshipResponse, PyLaunchesResponse
 
@@ -51,16 +51,41 @@ class PyLaunches:
         if self.session and self._close_session:
             await self.session.close()
 
+    async def _call_api(
+        self,
+        endpoint: str,
+        params: Mapping[str, str] | None = None,
+    ) -> dict:
+        """Call the API."""
+        headers = HEADERS
+        timeout = ClientTimeout(total=20)
+        if (token := self.token) is not None:
+            headers["Authorization"] = f"Token {token}"
+        try:
+            response = await self.session.get(
+                endpoint,
+                headers=headers,
+                timeout=timeout,
+                params=params,
+            )
+            if response.status != 200:
+                raise PyLaunchesError(f"Unexpected statuscode {response.status}")
+            return await response.json()
+        except (CancelledError, PyLaunchesError) as exception:
+            raise PyLaunchesError(exception) from exception
+        except TimeoutError as exception:
+            raise PyLaunchesError(
+                f"Timeout of {timeout.total} reached while fetching data from {endpoint}"
+            ) from exception
+
     async def launch_upcoming(
         self,
         *,
         filters: Mapping[str, str] | None = None,
     ) -> list[Launch]:
         """Get upcoming launch information."""
-        response: PyLaunchesResponse[list[Launch]] = await call_api(
-            self.session,
+        response: PyLaunchesResponse[list[Launch]] = await self._call_api(
             f"{self._base_url}/launch/upcoming/",
-            self.token,
             params=filters,
         )
         if not (results := response.get("results")):
@@ -73,10 +98,8 @@ class PyLaunches:
         filters: Mapping[str, str] | None = None,
     ) -> StarshipResponse:
         """Get upcoming launch information for starship."""
-        response: StarshipResponse = await call_api(
-            self.session,
+        response: StarshipResponse = await self._call_api(
             f"{self._base_url}/dashboard/starship/",
-            self.token,
             params=filters,
         )
         if not response.get("previous", {}).get("launches"):
@@ -89,10 +112,8 @@ class PyLaunches:
         filters: Mapping[str, str] | None = None,
     ) -> list[Event]:
         """Get events."""
-        response: PyLaunchesResponse[list[Event]] = await call_api(
-            self.session,
+        response: PyLaunchesResponse[list[Event]] = await self._call_api(
             f"{self._base_url}/event/",
-            self.token,
             params=filters,
         )
         if not (results := response.get("results")):
@@ -105,10 +126,8 @@ class PyLaunches:
         filters: Mapping[str, str] | None = None,
     ) -> list[Event]:
         """Get previous events."""
-        response: PyLaunchesResponse[list[Event]] = await call_api(
-            self.session,
+        response: PyLaunchesResponse[list[Event]] = await self._call_api(
             f"{self._base_url}/event/previous/",
-            self.token,
             params=filters,
         )
         if not (results := response.get("results")):
@@ -121,10 +140,8 @@ class PyLaunches:
         filters: Mapping[str, str] | None = None,
     ) -> list[Event]:
         """Get upcoming events."""
-        response: PyLaunchesResponse[list[Event]] = await call_api(
-            self.session,
+        response: PyLaunchesResponse[list[Event]] = await self._call_api(
             f"{self._base_url}/event/upcoming/",
-            self.token,
             params=filters,
         )
         if not (results := response.get("results")):
