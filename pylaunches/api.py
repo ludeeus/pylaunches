@@ -12,7 +12,7 @@ from aiohttp import ClientSession
 
 from .common import call_api
 from .const import BASE_URL, DEFAULT_API_VERSION, DEV_BASE_URL
-from .exceptions import PyLaunchesNoData
+from .exceptions import PyLaunchesError
 from .types import Launch, StarshipResponse, PyLaunchesResponse
 
 
@@ -64,7 +64,7 @@ class PyLaunches:
             params=filters,
         )
         if not (results := response.get("results")):
-            raise PyLaunchesNoData("No launch data")
+            raise PyLaunchesError("No launch data")
         return results
 
     async def starship_events(
@@ -82,5 +82,5 @@ class PyLaunches:
             )
         )
         if not response.get("previous", {}).get("launches"):
-            raise PyLaunchesNoData("No starship data.")
+            raise PyLaunchesError("No starship data.")
         return response

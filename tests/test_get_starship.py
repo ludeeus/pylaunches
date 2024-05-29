@@ -1,7 +1,6 @@
-import aiohttp
 import pytest
 
-from pylaunches import PyLaunches, PyLaunchesException, PyLaunchesNoData
+from pylaunches import PyLaunches, PyLaunchesError
 from pylaunches.const import HEADERS
 from tests.common import fixture
 
@@ -50,11 +49,11 @@ async def test_starship_events_exceptions(aresponses):
     )
 
     async with PyLaunches() as client:
-        with pytest.raises(PyLaunchesNoData):
+        with pytest.raises(PyLaunchesError, match="No starship data"):
             await client.starship_events()
 
     async with PyLaunches() as client:
-        with pytest.raises(PyLaunchesException):
+        with pytest.raises(PyLaunchesError):
             await client.starship_events()
 
 
