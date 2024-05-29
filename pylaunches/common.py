@@ -6,7 +6,7 @@ from typing import Mapping, Optional
 from aiohttp import ClientSession, ClientTimeout
 
 from .const import HEADERS
-from .exceptions import PyLaunchesException
+from .exceptions import PyLaunchesError
 
 
 async def call_api(
@@ -27,9 +27,9 @@ async def call_api(
             params=params,
         )
         if response.status != 200:
-            raise PyLaunchesException(f"Unexpected statuscode {response.status}")
+            raise PyLaunchesError(f"Unexpected statuscode {response.status}")
         return await response.json()
-    except (CancelledError, PyLaunchesException) as exception:
-        raise PyLaunchesException(exception)
+    except (CancelledError, PyLaunchesError) as exception:
+        raise PyLaunchesError(exception)
     except TimeoutError:
-        raise PyLaunchesException(f"Timeout while fetching data from {endpoint}")
+        raise PyLaunchesError(f"Timeout while fetching data from {endpoint}")
