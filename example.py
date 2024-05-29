@@ -5,7 +5,7 @@ import logging
 import os
 
 
-from pylaunches import PyLaunches, PyLaunchesException
+from pylaunches import PyLaunches, PyLaunchesError
 
 logging.basicConfig(
     level=logging.INFO,
@@ -21,10 +21,10 @@ async def example():
     """Example usage of pylaunches."""
     async with PyLaunches(token=os.environ.get("LAUNCH_TOKEN"), dev=True) as client:
         try:
-            launches = await client.upcoming_launches()
+            launches = await client.launch_upcoming(filters={"limit": 1})
             for launch in launches:
-                log.info(launch["name"])
-        except PyLaunchesException as exception:
+                log.info("%s: %s (%s)",launch["window_start"], launch["name"], launch["mission"]["description"])
+        except PyLaunchesError as exception:
             log.exception(exception)
 
 
