@@ -22,8 +22,8 @@ async def example():
     async with PyLaunches(token=os.environ.get("LAUNCH_TOKEN"), dev=True) as client:
         try:
             events = await client.event_upcoming(filters={"limit": 1, "program": "1"})
-            for events in events:
-                log.info("%s", events["name"])
+            for event in events:
+                log.info("%s", event["name"])
         except PyLaunchesError as exception:
             log.exception(exception)
 
