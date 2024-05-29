@@ -19,8 +19,7 @@ async def test_upcoming_launches(aresponses):
     async with PyLaunches() as client:
         launches = await client.upcoming_launches()
         first = launches[0]
-        assert first.name == "Example | Example-01"
-        assert isinstance(first.raw_data_contents, dict)
+        assert first["name"] == "Example | Example-01"
 
 
 @pytest.mark.asyncio

@@ -23,7 +23,7 @@ async def example():
         try:
             launches = await client.upcoming_launches()
             for launch in launches:
-                log.info(launch.name)
+                log.info(launch["name"])
         except PyLaunchesException as exception:
             log.exception(exception)
 

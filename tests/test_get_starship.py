@@ -18,20 +18,20 @@ async def test_starship_events(aresponses):
 
     async with PyLaunches() as client:
         starship = await client.starship_events()
-        upcoming_launch = starship.upcoming.launches[0]
-        assert upcoming_launch.name == "Example | Example-01"
-        upcoming_event = starship.upcoming.events[0]
-        assert upcoming_event.name == "Example | Example-01"
-        previous_launch = starship.previous.launches[0]
-        assert previous_launch.name == "Example | Example-01"
-        previous_event = starship.upcoming.events[0]
-        assert previous_event.name == "Example | Example-01"
-        live_stream = starship.live_streams[0]
-        assert live_stream.title == "24/7 Livestream"
-        road_closure = starship.road_closures[0]
-        assert road_closure.title == "Primary Date"
-        vehicle = starship.vehicles[0]
-        assert vehicle.serial_number == "BN1"
+        upcoming_launch = starship["upcoming"]["launches"][0]
+        assert upcoming_launch["name"] == "Example | Example-01"
+        upcoming_event = starship["upcoming"]["events"][0]
+        assert upcoming_event["name"] == "Example | Example-01"
+        previous_launch = starship["previous"]["launches"][0]
+        assert previous_launch["name"] == "Example | Example-01"
+        previous_event = starship["previous"]["events"][0]
+        assert previous_event["name"] == "Example | Example-01"
+        live_stream = starship["live_streams"][0]
+        assert live_stream["title"] == "24/7 Livestream"
+        road_closure = starship["road_closures"][0]
+        assert road_closure["title"] == "Primary Date"
+        vehicle = starship["vehicles"][0]
+        assert vehicle["serial_number"] == "BN1"
 
 
 @pytest.mark.asyncio
