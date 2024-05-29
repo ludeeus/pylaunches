@@ -7,7 +7,7 @@ from tests.common import fixture
 
 
 @pytest.mark.asyncio
-async def test_upcoming_launches(aresponses):
+async def test_launch_upcoming(aresponses):
     response = fixture("upcoming.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
@@ -17,13 +17,13 @@ async def test_upcoming_launches(aresponses):
     )
 
     async with PyLaunches() as client:
-        launches = await client.upcoming_launches()
+        launches = await client.launch_upcoming()
         first = launches[0]
         assert first["name"] == "Example | Example-01"
 
 
 @pytest.mark.asyncio
-async def test_upcoming_launches_exceptions(aresponses):
+async def test_launch_upcoming_exceptions(aresponses):
     aresponses.add(
         "ll.thespacedevs.com",
         "/2.2.0/launch/upcoming/",
@@ -39,15 +39,15 @@ async def test_upcoming_launches_exceptions(aresponses):
 
     async with PyLaunches() as client:
         with pytest.raises(PyLaunchesError, match="No launch data"):
-            await client.upcoming_launches()
+            await client.launch_upcoming()
 
     async with PyLaunches() as client:
         with pytest.raises(PyLaunchesError):
-            await client.upcoming_launches()
+            await client.launch_upcoming()
 
 
 @pytest.mark.asyncio
-async def test_upcoming_launches_params(aresponses):
+async def test_launch_upcoming_params(aresponses):
     response = fixture("upcoming.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
@@ -58,5 +58,5 @@ async def test_upcoming_launches_params(aresponses):
     )
 
     async with PyLaunches() as client:
-        launches = await client.upcoming_launches(filters={"limit": "1"})
+        launches = await client.launch_upcoming(filters={"limit": "1"})
         assert launches

@@ -51,7 +51,7 @@ class PyLaunches:
         if self.session and self._close_session:
             await self.session.close()
 
-    async def upcoming_launches(
+    async def launch_upcoming(
         self,
         *,
         filters: Mapping[str, str] | None = None,
