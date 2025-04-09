@@ -155,29 +155,31 @@ class Launch(IdNameObjectWithResponseMode):
 
     url: str
     slug: str
-    launch_designator: str
+    launch_designator: str | None
     status: LaunchStatus
     last_updated: str
     net: str
     window_end: str
     window_start: str
     image: Image | None
-    failreason: str
-    hashtag: str
+    failreason: str | None
+    hashtag: str | None
     launch_service_provider: LaunchServiceProvider
     rocket: Rocket
-    mission: LaunchMission
+    mission: LaunchMission | None
     pad: LaunchPad
     webcast_live: bool
     program: list[dict]
-    orbital_launch_attempt_count: int
-    location_launch_attempt_count: int
-    pad_launch_attempt_count: int
-    agency_launch_attempt_count: int
-    orbital_launch_attempt_count_year: int
-    location_launch_attempt_count_year: int
-    pad_launch_attempt_count_year: int
-    agency_launch_attempt_count_year: int
+    orbital_launch_attempt_count: int | None
+    location_launch_attempt_count: int | None
+    pad_launch_attempt_count: int | None
+    agency_launch_attempt_count: int | None
+    orbital_launch_attempt_count_year: int | None
+    location_launch_attempt_count_year: int | None
+    pad_launch_attempt_count_year: int | None
+    agency_launch_attempt_count_year: int | None
+    probability: int | None
+    weather_concerns: str | None
 
 
 class Event(IdNameObjectWithResponseMode):
@@ -191,7 +193,12 @@ class Event(IdNameObjectWithResponseMode):
     description: str
     webcast_live: bool
     location: str
+    date_precision: str | None
+    duration: str | None
+    updates: list[dict]
     last_updated: str
+    info_urls: list[str]
+    vid_urls: list[dict]
 
 
 class StarshipLiveStream(TypedDict):
