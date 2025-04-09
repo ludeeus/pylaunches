@@ -7,13 +7,16 @@ file for more details.
 
 from __future__ import annotations
 from asyncio import CancelledError
+from logging import getLogger, Logger
 from typing import Mapping
 
 from aiohttp import ClientSession, ClientTimeout
 
-from .const import BASE_URL, DEFAULT_API_VERSION, DEV_BASE_URL, HEADERS
+from .const import API_VERSION, BASE_URL, DEV_BASE_URL, HEADERS
 from .exceptions import PyLaunchesError
 from .types import Event, Launch, StarshipResponse, PyLaunchesResponse
+
+LOGGER: Logger = getLogger(__package__)
 
 
 class PyLaunches:
@@ -26,7 +29,6 @@ class PyLaunches:
         session: ClientSession | None = None,
         token: str = None,
         *,
-        api_version: str = DEFAULT_API_VERSION,
         dev: bool = False,
     ) -> None:
         """Initialize the class."""
@@ -36,7 +38,7 @@ class PyLaunches:
             self.session = ClientSession()
             self._close_session = True
 
-        self._base_url = f"{DEV_BASE_URL if dev else BASE_URL}/{api_version}"
+        self._base_url = f"{DEV_BASE_URL if dev else BASE_URL}/{API_VERSION}"
 
     async def __aenter__(self) -> PyLaunches:
         """Async enter."""
