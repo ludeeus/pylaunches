@@ -18,6 +18,7 @@ from .types import Event, Launch, StarshipResponse, PyLaunchesResponse
 
 LOGGER: Logger = getLogger(__package__)
 
+
 class PyLaunches:
     """A class to get launch information."""
 
@@ -36,7 +37,7 @@ class PyLaunches:
         if self.session is None:
             self.session = ClientSession()
             self._close_session = True
-            
+
         self._base_url = f"{DEV_BASE_URL if dev else BASE_URL}/{API_VERSION}"
 
     async def __aenter__(self) -> PyLaunches:
