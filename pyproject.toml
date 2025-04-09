@@ -20,7 +20,7 @@ repository = "https://github.com/ludeeus/pylaunches"
 version = "0"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.13"
 aiohttp = "^3.6"
 
 [tool.poetry.dev-dependencies]
