@@ -10,7 +10,7 @@ async def test_dashboard_starship(aresponses):
     response = fixture("starship.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/dashboard/starship/",
+        "/2.3.0/dashboard/starship/",
         "get",
         aresponses.Response(text=response, headers=HEADERS),
     )
@@ -37,13 +37,13 @@ async def test_dashboard_starship(aresponses):
 async def test_dashboard_starship_exceptions(aresponses):
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/dashboard/starship/",
+        "/2.3.0/dashboard/starship/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS),
     )
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/dashboard/starship/",
+        "/2.3.0/dashboard/starship/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS, status=500),
     )
@@ -62,7 +62,7 @@ async def test_dashboard_starship_params(aresponses):
     response = fixture("starship.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/dashboard/starship/?limit=1",
+        "/2.3.0/dashboard/starship/?limit=1",
         "get",
         aresponses.Response(text=response, headers=HEADERS),
         match_querystring=True,

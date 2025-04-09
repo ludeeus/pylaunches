@@ -27,7 +27,6 @@
           "--cov-report=xml"
         ],
         "python.testing.pytestEnabled": true,
-        "ruff.importStrategy": "fromEnvironment",
         "terminal.integrated.defaultProfile.linux": "zsh",
         "extensions": [
           "be5invis.toml",

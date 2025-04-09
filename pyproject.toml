@@ -23,7 +23,7 @@ version = "0"
 python = "^3.13"
 aiohttp = "^3.6"
 
-[tool.poetry.dev-dependencies]
+[poetry.group.dev.dependencies]
 aresponses = "3.0.0"
 black = "25.1.0"
 pytest = "8.3.5"

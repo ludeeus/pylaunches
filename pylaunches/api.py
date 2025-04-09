@@ -8,7 +8,7 @@ file for more details.
 from __future__ import annotations
 from asyncio import CancelledError
 from logging import getLogger, Logger
-from typing import Mapping
+from typing import Mapping, cast
 
 from aiohttp import ClientSession, ClientTimeout
 
@@ -23,11 +23,12 @@ class PyLaunches:
     """A class to get launch information."""
 
     _close_session = False
+    session: ClientSession
 
     def __init__(
         self,
         session: ClientSession | None = None,
-        token: str = None,
+        token: str | None = None,
         *,
         dev: bool = False,
     ) -> None:
@@ -86,13 +87,13 @@ class PyLaunches:
         filters: Mapping[str, str] | None = None,
     ) -> list[Launch]:
         """Get upcoming launch information."""
-        response: PyLaunchesResponse[list[Launch]] = await self._call_api(
-            f"{self._base_url}/launch/upcoming/",
+        response = await self._call_api(
+            f"{self._base_url}/launches/upcoming/",
             params=filters,
         )
         if not (results := response.get("results")):
             raise PyLaunchesError("No launch data")
-        return results
+        return cast(list[Launch], results)
 
     async def dashboard_starship(
         self,
@@ -100,13 +101,13 @@ class PyLaunches:
         filters: Mapping[str, str] | None = None,
     ) -> StarshipResponse:
         """Get upcoming launch information for starship."""
-        response: StarshipResponse = await self._call_api(
+        response = await self._call_api(
             f"{self._base_url}/dashboard/starship/",
             params=filters,
         )
         if not response.get("previous", {}).get("launches"):
             raise PyLaunchesError("No starship data.")
-        return response
+        return cast(StarshipResponse, response)
 
     async def event(
         self,
@@ -114,13 +115,13 @@ class PyLaunches:
         filters: Mapping[str, str] | None = None,
     ) -> list[Event]:
         """Get events."""
-        response: PyLaunchesResponse[list[Event]] = await self._call_api(
-            f"{self._base_url}/event/",
+        response = await self._call_api(
+            f"{self._base_url}/events/",
             params=filters,
         )
         if not (results := response.get("results")):
             raise PyLaunchesError("No event data")
-        return results
+        return cast(list[Event], results)
 
     async def event_previous(
         self,
@@ -128,13 +129,13 @@ class PyLaunches:
         filters: Mapping[str, str] | None = None,
     ) -> list[Event]:
         """Get previous events."""
-        response: PyLaunchesResponse[list[Event]] = await self._call_api(
-            f"{self._base_url}/event/previous/",
+        response = await self._call_api(
+            f"{self._base_url}/events/previous/",
             params=filters,
         )
         if not (results := response.get("results")):
             raise PyLaunchesError("No event data")
-        return results
+        return cast(list[Event], results)
 
     async def event_upcoming(
         self,
@@ -142,10 +143,10 @@ class PyLaunches:
         filters: Mapping[str, str] | None = None,
     ) -> list[Event]:
         """Get upcoming events."""
-        response: PyLaunchesResponse[list[Event]] = await self._call_api(
-            f"{self._base_url}/event/upcoming/",
+        response = await self._call_api(
+            f"{self._base_url}/events/upcoming/",
             params=filters,
         )
         if not (results := response.get("results")):
             raise PyLaunchesError("No event data")
-        return results
+        return cast(list[Event], results)

@@ -2,26 +2,84 @@
 
 from __future__ import annotations
 
-from typing import Generic, TypeVar, TypedDict
+from typing import Generic, Literal, TypeVar, TypedDict
 
 _T = TypeVar("_T")
 
 
-class IdName(TypedDict):
+class IdNameObject(TypedDict):
     """Launch Library ID Name Type data object."""
 
     id: int
     name: str
 
 
-class RocketConfiguration(IdName):
+class IdNameObjectWithResponseMode(IdNameObject):
+    """Launch Library ID Name Type data object with response mode."""
+
+    response_mode: Literal["list"] | Literal["normal"] | Literal["detailed"]
+
+
+class License(IdNameObject):
+    """Launch Library Image Type data object."""
+
+    priority: int
+    link: str
+
+
+class Country(IdNameObject):
+    """Launch Library Country data object."""
+
+    alpha_2_code: str
+    alpha_3_code: str
+    nationality_name: str
+    nationality_name_composed: str
+
+
+class LaunchStatus(IdNameObject):
+    """Launch Library Status Type data object."""
+
+    abbrev: str
+    description: str
+
+
+class Image(IdNameObject):
+    """Launch Library Image Type data object."""
+
+    image_url: str
+    thumbnail_url: str
+    credit: str
+    license: License
+    single_use: bool
+
+
+class RocketConfiguration(IdNameObjectWithResponseMode):
     """Rocket Configuration data object."""
 
-    family: str
-    full_name: str
-    launch_library_id: int
     url: str
+    full_name: str
     variant: str
+    families: list[IdNameObjectWithResponseMode]
+
+
+class CelestialBody(IdNameObjectWithResponseMode):
+    """Celestial body data object."""
+
+    type: IdNameObject
+    diameter: float
+    mass: float
+    gravity: float
+    length_of_day: str
+    atmosphere: bool
+    image: Image | None
+    description: str
+    wiki_url: str
+    total_attempted_launches: int
+    successful_launches: int
+    failed_launches: int
+    total_attempted_landings: int
+    successful_landings: int
+    failed_landings: int
 
 
 class Rocket(TypedDict):
@@ -31,93 +89,109 @@ class Rocket(TypedDict):
     id: str
 
 
-class LaunchPadLocation(IdName):
-    """Launch data object."""
+class LaunchPadLocation(IdNameObjectWithResponseMode):
+    """Launch Library Launch Pad Location data object."""
 
-    country_code: str
-    map_image: str
-    total_landing_count: int
-    total_launch_count: int
     url: str
+    celestial_body: CelestialBody
+    active: bool
+    country: Country
+    description: str
+    image: Image | None
+    map_image: str
+    longitude: float
+    latitude: float
+    timezone_name: str
+    total_launch_count: int
+    total_landing_count: int
 
 
-class LaunchServiceProvider(IdName):
+class LaunchServiceProvider(IdNameObjectWithResponseMode):
     """Launch Library ID Name Type data object."""
 
-    type: str
+    type: IdNameObject
     url: str
-
-
-class LaunchMissionOrbit(IdName):
-    """Launch data object."""
-
     abbrev: str
 
 
-class LaunchPad(IdName):
+class LaunchMissionOrbit(IdNameObject):
     """Launch data object."""
 
-    agency_id: int
-    info_url: str
-    latitude: str
-    location: LaunchPadLocation
-    longitude: str
-    map_image: str
-    map_url: str
-    total_launch_count: int
+    abbrev: str
+    celestial_body: IdNameObjectWithResponseMode
+
+
+class LaunchPad(IdNameObject):
+    """Launch data object."""
+
     url: str
+    active: bool
+    image: Image | None
+    description: str | None
+    info_url: str | None
     wiki_url: str
+    map_url: str
+    latitude: float
+    longitude: float
+    country: Country
+    map_image: str
+    total_launch_count: int
+    orbital_launch_attempt_count: int
+    fastest_turnaround: str
+    location: LaunchPadLocation
 
 
-class LaunchMission(IdName):
+class LaunchMission(IdNameObject):
     """Launch data object."""
 
-    description: str
-    launch_designator: str
-    launch_library_id: int
-    orbit: LaunchMissionOrbit
     type: str
+    description: str
+    image: Image | None
+    orbit: LaunchMissionOrbit
 
 
-class Launch(IdName):
+class Launch(IdNameObjectWithResponseMode):
     """Launch data object."""
 
-    failreason: str
-    hashtag: str
-    holdreason: str
-    image: str
-    infographic: str
-    inhold: bool
-    launch_library_id: int
-    launch_service_provider: LaunchServiceProvider
-    mission: LaunchMission
-    net: str
-    pad: LaunchPad
-    probability: int
-    program: list[dict]
-    rocket: Rocket
-    slug: str
-    status: IdName
-    tbddate: bool
-    tbdtime: bool
     url: str
-    webcast_live: bool
+    slug: str
+    launch_designator: str
+    status: LaunchStatus
+    last_updated: str
+    net: str
     window_end: str
     window_start: str
+    image: Image | None
+    failreason: str
+    hashtag: str
+    launch_service_provider: LaunchServiceProvider
+    rocket: Rocket
+    mission: LaunchMission
+    pad: LaunchPad
+    webcast_live: bool
+    program: list[dict]
+    orbital_launch_attempt_count: int
+    location_launch_attempt_count: int
+    pad_launch_attempt_count: int
+    agency_launch_attempt_count: int
+    orbital_launch_attempt_count_year: int
+    location_launch_attempt_count_year: int
+    pad_launch_attempt_count_year: int
+    agency_launch_attempt_count_year: int
 
 
-class Event(IdName):
+class Event(IdNameObjectWithResponseMode):
     """Launch Library Event."""
 
+    url: str
+    image: Image | None
     date: str
-    description: str
-    feature_image: str
-    launches: list[Launch]
-    location: str
-    news_url: str
     slug: str
-    type: IdName
-    video_url: str
+    type: IdNameObject
+    description: str
+    webcast_live: bool
+    location: str
+    last_updated: str
 
 
 class StarshipLiveStream(TypedDict):
@@ -133,7 +207,7 @@ class StarshipRoadClosure(TypedDict):
     """Road closure data object."""
 
     id: str
-    status: IdName
+    status: IdNameObject
     title: str
     window_end: str
     window_start: str
@@ -175,7 +249,7 @@ class StarshipResponse(PyLaunchesResponse[None]):
     """Starship response data object."""
 
     live_streams: list[StarshipLiveStream]
-    previous: StarshipEvents
+    previous: StarshipEvents  # type: ignore
     road_closures: list[StarshipRoadClosure]
     upcoming: StarshipEvents
     vehicles: list[StarshipVehicle]

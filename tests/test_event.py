@@ -10,7 +10,7 @@ async def test_event(aresponses):
     response = fixture("event.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/",
+        "/2.3.0/events/",
         "get",
         aresponses.Response(text=response, headers=HEADERS),
     )
@@ -25,13 +25,13 @@ async def test_event(aresponses):
 async def test_event_exceptions(aresponses):
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/",
+        "/2.3.0/events/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS),
     )
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/",
+        "/2.3.0/events/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS, status=500),
     )
@@ -50,7 +50,7 @@ async def test_event_params(aresponses):
     response = fixture("event.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/?limit=1",
+        "/2.3.0/events/?limit=1",
         "get",
         aresponses.Response(text=response, headers=HEADERS),
         match_querystring=True,
