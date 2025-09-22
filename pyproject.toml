@@ -25,6 +25,6 @@ aiohttp = "^3.6"
 
 [tool.poetry.dev-dependencies]
 aresponses = "3.0.0"
-black = "25.1.0"
+black = "25.9.0"
 pytest = "8.4.2"
 pytest-asyncio = "1.2.0"
