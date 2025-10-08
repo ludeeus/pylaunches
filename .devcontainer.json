@@ -43,6 +43,6 @@
   "features": {
     "ghcr.io/devcontainers-contrib/features/poetry:2": {}
   },
-  "image": "mcr.microsoft.com/devcontainers/python:3.13",
+  "image": "mcr.microsoft.com/devcontainers/python:3.14",
   "updateContentCommand": "poetry install"
 }
