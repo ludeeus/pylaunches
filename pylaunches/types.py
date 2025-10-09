@@ -14,10 +14,16 @@ class IdName(TypedDict):
     name: str
 
 
+class LauncherConfigurationFamily(IdName):
+    """Launcher Configuration Family data object."""
+
+    pass
+
+
 class RocketConfiguration(IdName):
     """Rocket Configuration data object."""
 
-    family: str
+    family: LauncherConfigurationFamily
     full_name: str
     launch_library_id: int
     url: str
@@ -57,11 +63,11 @@ class LaunchMissionOrbit(IdName):
 class LaunchPad(IdName):
     """Launch data object."""
 
-    agency_id: int
+    agencies: list[dict]  # Changed from agency_id to M2M relation in 2.3.0
     info_url: str
-    latitude: str
+    latitude: float  # Changed from str to float in 2.3.0
     location: LaunchPadLocation
-    longitude: str
+    longitude: float  # Changed from str to float in 2.3.0
     map_image: str
     map_url: str
     total_launch_count: int
@@ -73,7 +79,6 @@ class LaunchMission(IdName):
     """Launch data object."""
 
     description: str
-    launch_designator: str
     launch_library_id: int
     orbit: LaunchMissionOrbit
     type: str
@@ -84,10 +89,10 @@ class Launch(IdName):
 
     failreason: str
     hashtag: str
-    holdreason: str
     image: str
     infographic: str
     inhold: bool
+    launch_designator: str  # Moved from Mission to Launch in 2.3.0
     launch_library_id: int
     launch_service_provider: LaunchServiceProvider
     mission: LaunchMission
@@ -114,10 +119,8 @@ class Event(IdName):
     feature_image: str
     launches: list[Launch]
     location: str
-    news_url: str
     slug: str
     type: IdName
-    video_url: str
 
 
 class StarshipLiveStream(TypedDict):
