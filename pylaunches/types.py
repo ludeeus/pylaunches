@@ -17,8 +17,6 @@ class IdName(TypedDict):
 class LauncherConfigurationFamily(IdName):
     """Launcher Configuration Family data object."""
 
-    pass
-
 
 class RocketConfiguration(IdName):
     """Rocket Configuration data object."""
@@ -63,11 +61,11 @@ class LaunchMissionOrbit(IdName):
 class LaunchPad(IdName):
     """Launch data object."""
 
-    agencies: list[dict]  # Changed from agency_id to M2M relation in 2.3.0
+    agencies: list[dict]
     info_url: str
-    latitude: float  # Changed from str to float in 2.3.0
+    latitude: float
     location: LaunchPadLocation
-    longitude: float  # Changed from str to float in 2.3.0
+    longitude: float
     map_image: str
     map_url: str
     total_launch_count: int
@@ -92,7 +90,7 @@ class Launch(IdName):
     image: str
     infographic: str
     inhold: bool
-    launch_designator: str  # Moved from Mission to Launch in 2.3.0
+    launch_designator: str
     launch_library_id: int
     launch_service_provider: LaunchServiceProvider
     mission: LaunchMission
