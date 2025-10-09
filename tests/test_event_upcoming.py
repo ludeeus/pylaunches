@@ -10,7 +10,7 @@ async def test_event_upcoming(aresponses):
     response = fixture("event.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/upcoming/",
+        "/2.3.0/event/upcoming/",
         "get",
         aresponses.Response(text=response, headers=HEADERS),
     )
@@ -25,13 +25,13 @@ async def test_event_upcoming(aresponses):
 async def test_event_upcoming_exceptions(aresponses):
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/upcoming/",
+        "/2.3.0/event/upcoming/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS),
     )
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/upcoming/",
+        "/2.3.0/event/upcoming/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS, status=500),
     )
@@ -50,7 +50,7 @@ async def test_event_upcoming_params(aresponses):
     response = fixture("event.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/upcoming/?limit=1",
+        "/2.3.0/event/upcoming/?limit=1",
         "get",
         aresponses.Response(text=response, headers=HEADERS),
         match_querystring=True,

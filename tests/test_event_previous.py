@@ -10,7 +10,7 @@ async def test_event_previous(aresponses):
     response = fixture("event.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/previous/",
+        "/2.3.0/event/previous/",
         "get",
         aresponses.Response(text=response, headers=HEADERS),
     )
@@ -25,13 +25,13 @@ async def test_event_previous(aresponses):
 async def test_event_previous_exceptions(aresponses):
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/previous/",
+        "/2.3.0/event/previous/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS),
     )
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/previous/",
+        "/2.3.0/event/previous/",
         "get",
         aresponses.Response(text="{}", headers=HEADERS, status=500),
     )
@@ -50,7 +50,7 @@ async def test_event_previous_params(aresponses):
     response = fixture("event.json", False)
     aresponses.add(
         "ll.thespacedevs.com",
-        "/2.2.0/event/previous/?limit=1",
+        "/2.3.0/event/previous/?limit=1",
         "get",
         aresponses.Response(text=response, headers=HEADERS),
         match_querystring=True,
