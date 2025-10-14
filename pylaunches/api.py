@@ -87,7 +87,7 @@ class PyLaunches:
     ) -> list[Launch]:
         """Get upcoming launch information."""
         response: PyLaunchesResponse[list[Launch]] = await self._call_api(
-            f"{self._base_url}/launch/upcoming/",
+            f"{self._base_url}/launches/upcoming/",
             params=filters,
         )
         if not (results := response.get("results")):
@@ -115,7 +115,7 @@ class PyLaunches:
     ) -> list[Event]:
         """Get events."""
         response: PyLaunchesResponse[list[Event]] = await self._call_api(
-            f"{self._base_url}/event/",
+            f"{self._base_url}/events/",
             params=filters,
         )
         if not (results := response.get("results")):
@@ -129,7 +129,7 @@ class PyLaunches:
     ) -> list[Event]:
         """Get previous events."""
         response: PyLaunchesResponse[list[Event]] = await self._call_api(
-            f"{self._base_url}/event/previous/",
+            f"{self._base_url}/events/previous/",
             params=filters,
         )
         if not (results := response.get("results")):
@@ -143,7 +143,7 @@ class PyLaunches:
     ) -> list[Event]:
         """Get upcoming events."""
         response: PyLaunchesResponse[list[Event]] = await self._call_api(
-            f"{self._base_url}/event/upcoming/",
+            f"{self._base_url}/events/upcoming/",
             params=filters,
         )
         if not (results := response.get("results")):
