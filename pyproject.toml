@@ -1,30 +1,39 @@
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires = ["poetry-core>=1.0.0"]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
 
-[tool.poetry]
-authors = ["Ludeeus <ludeeus@ludeeus.dev>"]
+[project]
+name = "pylaunches"
+version = "0"
+description = ""
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+  {name = "Ludeeus", email = "ludeeus@ludeeus.dev"}
+]
+maintainers = [
+  {name = "Ludeeus", email = "ludeeus@ludeeus.dev"}
+]
 classifiers = [
   "Intended Audience :: Developers",
   "Natural Language :: English",
   "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-exclude = ['**/__pycache__']
-include = ["pylaunches", "pylaunches.*", "LICENCE"]
-license = "MIT"
-description = ""
-maintainers = ["Ludeeus <ludeeus@ludeeus.dev>"]
-name = "pylaunches"
-readme = "README.md"
-repository = "https://github.com/ludeeus/pylaunches"
-version = "0"
+requires-python = ">=3.14"
+dependencies = [
+  "aiohttp>=3.6",
+]
 
-[tool.poetry.dependencies]
-python = "^3.14"
-aiohttp = "^3.6"
+[project.urls]
+Repository = "https://github.com/ludeeus/pylaunches"
 
-[tool.poetry.dev-dependencies]
-aresponses = "3.0.0"
-black = "25.9.0"
-pytest = "8.4.2"
-pytest-asyncio = "1.2.0"
+[dependency-groups]
+dev = [
+  "aresponses==3.0.0",
+  "black==25.9.0",
+  "pytest==8.4.2",
+  "pytest-asyncio==1.2.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["pylaunches"]

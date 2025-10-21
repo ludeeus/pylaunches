@@ -9,7 +9,7 @@
             "source.organizeImports": "explicit"
           },
           "editor.formatOnSave": true,
-          "editor.defaultFormatter": "ms-python.black-formatter"
+          "editor.defaultFormatter": "ms-python.python"
         },
         "coverage-gutters.customizable.context-menu": true,
         "coverage-gutters.customizable.status-bar-toggler-watchCoverageAndVisibleEditors-enabled": true,
@@ -40,9 +40,7 @@
       }
     }
   },
-  "features": {
-    "ghcr.io/devcontainers-contrib/features/poetry:2": {}
-  },
+  "features": {},
   "image": "mcr.microsoft.com/devcontainers/python:3.14",
-  "updateContentCommand": "poetry install"
+  "postCreateCommand": "pip install uv && uv sync"
 }
