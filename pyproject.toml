@@ -31,7 +31,7 @@ Repository = "https://github.com/ludeeus/pylaunches"
 dev = [
   "aresponses==3.0.0",
   "black==25.11.0",
-  "pytest==9.0.1",
+  "pytest==9.0.2",
   "pytest-asyncio==1.3.0",
 ]
 
