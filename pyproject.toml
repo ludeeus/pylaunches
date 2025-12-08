@@ -30,7 +30,7 @@ Repository = "https://github.com/ludeeus/pylaunches"
 [dependency-groups]
 dev = [
   "aresponses==3.0.0",
-  "black==25.11.0",
+  "black==25.12.0",
   "pytest==9.0.2",
   "pytest-asyncio==1.3.0",
 ]
