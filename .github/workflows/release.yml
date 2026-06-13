@@ -5,9 +5,6 @@ on:
     types:
       - published
 
-env:
-  PYTHON_VERSION: "3.14"
-
 permissions: {}
 
 jobs:
@@ -20,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6.2.0
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version-file: ".python-version"
 
       - name: Install uv
         uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b  # v7.2.0
