@@ -41,6 +41,9 @@
     }
   },
   "features": {},
-  "image": "mcr.microsoft.com/devcontainers/python:3.14",
-  "postCreateCommand": "pip install uv && uv sync"
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "postCreateCommand": "uv sync"
 }

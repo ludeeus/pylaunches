@@ -1,10 +1,6 @@
 """Type definitions for the PyLaunches package."""
 
-from __future__ import annotations
-
-from typing import Generic, TypeVar, TypedDict
-
-_T = TypeVar("_T")
+from typing import TypedDict
 
 
 class IdName(TypedDict):
@@ -163,7 +159,7 @@ class StarshipEvents(TypedDict):
     launches: list[Launch]
 
 
-class PyLaunchesResponse(Generic[_T], TypedDict):
+class PyLaunchesResponse[_T](TypedDict):
     """Base class for all responses."""
 
     count: str

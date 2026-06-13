@@ -5,10 +5,8 @@ This code is released under the terms of the MIT license. See the LICENSE
 file for more details.
 """
 
-from __future__ import annotations
-from asyncio import CancelledError
+from collections.abc import Mapping
 from logging import getLogger, Logger
-from typing import Mapping
 
 from aiohttp import ClientSession, ClientTimeout
 
@@ -22,23 +20,23 @@ LOGGER: Logger = getLogger(__package__)
 class PyLaunches:
     """A class to get launch information."""
 
-    _close_session = False
+    _close_session: bool = False
 
     def __init__(
         self,
         session: ClientSession | None = None,
-        token: str = None,
+        token: str | None = None,
         *,
         dev: bool = False,
     ) -> None:
         """Initialize the class."""
-        self.session = session
-        self.token = token
+        self.session: ClientSession | None = session
+        self.token: str | None = token
         if self.session is None:
             self.session = ClientSession()
             self._close_session = True
 
-        self._base_url = f"{DEV_BASE_URL if dev else BASE_URL}/{API_VERSION}"
+        self._base_url: str = f"{DEV_BASE_URL if dev else BASE_URL}/{API_VERSION}"
 
     async def __aenter__(self) -> PyLaunches:
         """Async enter."""
@@ -59,7 +57,7 @@ class PyLaunches:
         params: Mapping[str, str] | None = None,
     ) -> dict:
         """Call the API."""
-        headers = HEADERS
+        headers = dict(HEADERS)
         timeout = ClientTimeout(total=20)
         if (token := self.token) is not None:
             headers["Authorization"] = f"Token {token}"
@@ -73,8 +71,6 @@ class PyLaunches:
             if response.status != 200:
                 raise PyLaunchesError(f"Unexpected statuscode {response.status}")
             return await response.json()
-        except (CancelledError, PyLaunchesError) as exception:
-            raise PyLaunchesError(exception) from exception
         except TimeoutError as exception:
             raise PyLaunchesError(
                 f"Timeout of {timeout.total} reached while fetching data from {endpoint}"

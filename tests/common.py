@@ -1,11 +1,10 @@
 import json
-import os
+from pathlib import Path
+from typing import Any
 
 
-def fixture(filename, asjson=True):
+def fixture(filename: str, asjson: bool = True) -> Any:
     """Load a fixture."""
-    path = os.path.join(os.path.dirname(__file__), "fixtures", filename)
-    with open(path, encoding="utf-8") as fptr:
-        if asjson:
-            return json.loads(fptr.read())
-        return fptr.read()
+    path = Path(__file__).parent / "fixtures" / filename
+    content = path.read_text(encoding="utf-8")
+    return json.loads(content) if asjson else content
